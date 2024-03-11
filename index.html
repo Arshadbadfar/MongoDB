@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Songs and Artists</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .column {
+            width: 45%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .column h2 {
+            text-align: center;
+        }
+        .column ol {
+            list-style-type: none;
+            padding: 0;
+        }
+        .column ol li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Top Songs and Artists</h1>
+    {% for week, data in top_data.items() %}
+        <h2>Week {{ week }}</h2>
+        <div class="container">
+            <div class="column">
+                <h3>Top 10 Songs</h3>
+                <ol>
+                    {% for song in data.top_songs %}
+                        <li>{{ song["_id"] }} ({{ song["count"] }} plays)</li>
+                    {% endfor %}
+                </ol>
+            </div>
+            <div class="column">
+                <h3>Top 10 Artists</h3>
+                <ol>
+                    {% for artist in data.top_artists %}
+                        <li>{{ artist["_id"] }} ({{ artist["count"] }} plays)</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>
